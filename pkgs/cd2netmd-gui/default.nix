@@ -21,13 +21,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "cd2netmd-gui";
-  version = "2.1.4";
+  version = "2.1.6";
 
   src = fetchFromGitHub {
     owner = "Jo2003";
     repo = "cd2netmd_gui";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-WPcs96xA3FGo62pIKC+xwqm4s3Gxo0l9HMx8vmH+9xg=";
+    hash = "sha256-8bNKLjKxIooy85klMpiraPYX2gPFTCRc1kaD2SielRo=";
   };
 
   buildInputs = [

@@ -2,51 +2,35 @@
   cmake,
   fetchFromGitHub,
   lib,
-  libgpg-error,
-  libgcrypt,
-  libusb1,
+  libsndfile,
   stdenv,
-  testers,
 }:
 stdenv.mkDerivation (finalAttrs: {
-  pname = "netmdplusplus";
-  version = "1.0.3";
+  pname = "atracdenc";
+  version = "0.2.2";
 
   src = fetchFromGitHub {
-    owner = "Jo2003";
-    repo = "netmd_plusplus";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-niDt7q6NOhiPTGYkiOfVxPZeHJ5ErDBlgJO+HKsZ+Dk=";
+    owner = "dcherednik";
+    repo = "atracdenc";
+    tag = "${finalAttrs.version}";
+    hash = "sha256-YixLz0pX4xPuy+HsKQraJdRpBfNL/SyDtEr4HEBouSY=";
+    fetchSubmodules = true;
   };
 
   buildInputs = [
-    libgcrypt
-    libgpg-error
-    libusb1
+    libsndfile
   ];
 
   nativeBuildInputs = [
     cmake
   ];
 
-  cmakeFlags = [
-    # https://github.com/NixOS/nixpkgs/issues/144170
-    "-DCMAKE_INSTALL_INCLUDEDIR=include"
-    "-DCMAKE_INSTALL_LIBDIR=lib"
-  ];
-
-  passthru.tests.pkg-config = testers.hasPkgConfigModules {
-    package = finalAttrs.finalPackage;
-  };
-
   meta = {
-    description = "C++ library for transferring audio to NetMD";
-    license = lib.licenses.gpl3Plus;
-    homepage = "https://github.com/Jo2003/netmd_plusplus";
+    description = "ATRAC decoder/encoder";
+    license = lib.licenses.lgpl21Plus;
+    homepage = "https://github.com/dcherednik/atracdenc";
     maintainers = with lib.maintainers; [ ddelabru ];
-    pkgConfigModules = [
-      "libnetmd++"
-    ];
+    mainProgram = "atracdenc";
     platforms = lib.platforms.all;
   };
 })

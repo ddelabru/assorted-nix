@@ -10,13 +10,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "netmdplusplus";
-  version = "1.0.3";
+  version = "unstable-2024-04-12";
 
   src = fetchFromGitHub {
     owner = "Jo2003";
     repo = "netmd_plusplus";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-niDt7q6NOhiPTGYkiOfVxPZeHJ5ErDBlgJO+HKsZ+Dk=";
+    rev = "2073b821d51afda046171e474e7864825e10088f";
+    hash = "sha256-MO5qa+6BXtHx84YRZDjZvqOGjx74LJBiGx4qoe1IUyY=";
   };
 
   buildInputs = [
