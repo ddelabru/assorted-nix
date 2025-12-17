@@ -29,7 +29,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "ATRAC decoder/encoder";
     license = lib.licenses.lgpl21Plus;
     homepage = "https://github.com/dcherednik/atracdenc";
-    maintainers = with lib.maintainers; [ ddelabru ];
     mainProgram = "atracdenc";
     platforms = lib.platforms.all;
   };

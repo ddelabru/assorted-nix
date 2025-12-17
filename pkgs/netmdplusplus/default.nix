@@ -43,7 +43,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "C++ library for transferring audio to NetMD";
     license = lib.licenses.gpl3Plus;
     homepage = "https://github.com/Jo2003/netmd_plusplus";
-    maintainers = with lib.maintainers; [ ddelabru ];
     pkgConfigModules = [
       "libnetmd++"
     ];
