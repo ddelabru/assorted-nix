@@ -21,6 +21,7 @@
       inherit system;
       config = {
         allowAliases = false;
+        allowUnfree = true;  # for steam-run, used to wrap Ren'Py
       };
       overlays = [ self.overlays.default ];
     };
