@@ -30,6 +30,7 @@
       packages = {
         at3tool = pkgs.at3tool;
         cd2netmd-gui = pkgs.cd2netmd-gui;
+        ersatz-jjy = pkgs.ersatz-jjy;
         netmd-udev-rules = pkgs.netmd-udev-rules;
         renpy = pkgs.renpy;
     };
