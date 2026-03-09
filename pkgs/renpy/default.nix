@@ -19,10 +19,10 @@
 }:
 let
   pname = "renpy";
-  version = "8.5.0";
+  version = "8.5.2";
   rapt-src = fetchzip {
     url = "https://www.renpy.org/dl/${version}/renpy-${version}-rapt.zip";
-    hash = "sha256-wuy/Nk5R+6GSHKw8ITbjaVmVO4NIARAC4Nm/IV9bByk=";
+    hash = "sha256-qS/qyVPIpDia3azITb7002WzjqehCer47IJJ7izytWE=";
   };
   meta = {
     description = "Visual novel engine";
@@ -51,7 +51,7 @@ stdenv.mkDerivation {
   name = "renpy";
   src = fetchzip {
     url = "https://www.renpy.org/dl/${version}/renpy-${version}-sdk.tar.bz2";
-    hash = "sha256-w8+p6enjaJllfyHBGMGHEDYq2qRrNJvJ6HY1ZNIWKlk=";
+    hash = "sha256-wF6Z/lA8CyaCEZg1IqpZ4mG8CF8JgNHBf5KjKIOoKVI=";
   };
   buildInputs = [
     jdk25_headless
