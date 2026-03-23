@@ -34,6 +34,7 @@
           ersatz-jjy = pkgs.ersatz-jjy;
           netmd-udev-rules = pkgs.netmd-udev-rules;
           renpy = pkgs.renpy;
+          vim-renpy = pkgs.vim-renpy;
         }
         // (pkgs.lib.optionalAttrs (system == "x86_64-linux") {
           at3tool = pkgs.at3tool;

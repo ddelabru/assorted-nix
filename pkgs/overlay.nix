@@ -6,4 +6,5 @@ final: prev: {
   netmd-udev-rules = prev.callPackage ./netmd-udev-rules { };
   netmdplusplus = prev.callPackage ./netmdplusplus { };
   renpy = prev.callPackage ./renpy { };
+  vim-renpy = prev.callPackage ./vim-renpy { };
 }
