@@ -11,10 +11,6 @@
     }:
     {
       overlays.default = import ./pkgs/overlay.nix;
-      # packages = {
-      # cd2netmd-gui = nixpkgs.callPackage ./pkgs/cd2netmd-gui;
-      # i686-linux.at3tool = nixpkgs.legacyPackages.i686-linux.callPackage ./pkgs/at3tool { };
-      # };
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
@@ -32,6 +28,7 @@
         packages = {
           cd2netmd-gui = pkgs.cd2netmd-gui;
           ersatz-jjy = pkgs.ersatz-jjy;
+	  jawanndenn = pkgs.jawanndenn;
           netmd-udev-rules = pkgs.netmd-udev-rules;
           renpy = pkgs.renpy;
           vim-renpy = pkgs.vim-renpy;
