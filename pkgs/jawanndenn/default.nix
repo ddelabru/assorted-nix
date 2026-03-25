@@ -23,6 +23,21 @@ python.pkgs.buildPythonApplication rec {
     cp -r ${jawanndenn-frontend}/* source/jawanndenn/
   '';
 
+  patchPhase = ''
+    runHook prePatch
+
+    substituteInPlace jawanndenn/__main__.py --replace-fail \
+    'os.environ["JAWANNDENN_ALLOWED_HOSTS"] = ",".join(
+            [options.host, "127.0.0.1", "0.0.0.0", "localhost"]
+        )' \
+    'os.environ.setdefault(
+            "JAWANNDENN_ALLOWED_HOSTS",
+            ",".join([options.host, "127.0.0.1", "0.0.0.0", "localhost"])
+        )'
+
+    runHook postPatch
+  '';
+
   build-system = with python.pkgs; [
     setuptools
   ];
