@@ -6,6 +6,7 @@
 # SDK or self-updating Ren'Py.
 
 {
+  buildFHSEnv,
   copyDesktopItems,
   fetchzip,
   imagemagick,
@@ -15,7 +16,6 @@
   makeDesktopItem,
   makeWrapper,
   stdenv,
-  steam-run,
 }:
 let
   pname = "renpy";
@@ -31,6 +31,7 @@ let
     license = lib.licenses.mit;
     mainProgram = "renpy";
     platforms = [
+      "aarch64-linux"
       "x86_64-linux"
     ];
   };
@@ -46,17 +47,55 @@ let
       "Development"
     ];
   };
+  renpy-fhs = buildFHSEnv {
+    name = "renpy-fhs";
+    includeClosures = true;
+    targetPkgs = (
+      p: with p; [
+        assimp
+        ffmpeg
+        ffmpeg.lib
+        freetype
+        fribidi
+        glew
+        glew.dev
+        harfbuzz
+        harfbuzz.dev
+        jdk25_headless
+        libGL
+        libGLU
+        libpng
+        (python3.withPackages (
+          python-pkgs: with python-pkgs; [
+            ecdsa
+            pefile
+            pygame-sdl2
+            requests
+            six
+            tkinter
+          ]
+        ))
+        SDL2
+        (lib.getDev SDL2)
+        zlib
+      ]
+    );
+  };
 in
 stdenv.mkDerivation {
   name = "renpy";
-  src = fetchzip {
-    url = "https://www.renpy.org/dl/${version}/renpy-${version}-sdk.tar.bz2";
-    hash = "sha256-wF6Z/lA8CyaCEZg1IqpZ4mG8CF8JgNHBf5KjKIOoKVI=";
-  };
-  buildInputs = [
-    jdk25_headless
-    steam-run
-  ];
+  version = version;
+  src =
+    if stdenv.hostPlatform.isAarch then
+      fetchzip {
+        url = "https://www.renpy.org/dl/${version}/renpy-${version}-sdkarm.tar.bz2";
+        hash = "sha256-DKXghs1XIRrtAGTifMx+7XAbxiqH7qYQiaKhBaO7PBA=";
+      }
+    else
+      fetchzip {
+        url = "https://www.renpy.org/dl/${version}/renpy-${version}-sdk.tar.bz2";
+        hash = "sha256-wF6Z/lA8CyaCEZg1IqpZ4mG8CF8JgNHBf5KjKIOoKVI=";
+      };
   nativeBuildInputs = [
     copyDesktopItems
     imagemagick
@@ -89,7 +128,7 @@ stdenv.mkDerivation {
       cp -R '$out'/share/renpy "$HOME"/.local/share/renpy
       chmod -R u+w "$HOME"/.local/share/renpy
     fi
-    ${lib.getExe steam-run} "$HOME"/.local/share/renpy/renpy.sh "$@"
+    ${lib.getExe renpy-fhs} "$HOME"/.local/share/renpy/renpy.sh "$@"
     ' > launch-renpy.sh
 
     mkdir -p $out/bin

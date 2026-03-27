@@ -32,5 +32,12 @@ pkgsi686Linux.stdenv.mkDerivation {
 
     runHook postInstall
   '';
+  meta = {
+    description = "ATRAC3 encoder tool";
+    mainProgram = "at3tool";
+    platforms = [
+      "x86_64-linux"
+    ];
+  };
 }
 

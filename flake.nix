@@ -19,7 +19,6 @@
           inherit system;
           config = {
             allowAliases = false;
-            allowUnfree = true; # for steam-run, used to wrap Ren'Py
           };
           overlays = [ self.overlays.default ];
         };
@@ -28,7 +27,6 @@
         packages = {
           cd2netmd-gui = pkgs.cd2netmd-gui;
           ersatz-jjy = pkgs.ersatz-jjy;
-	  jawanndenn = pkgs.jawanndenn;
           netmd-udev-rules = pkgs.netmd-udev-rules;
           renpy = pkgs.renpy;
           vim-renpy = pkgs.vim-renpy;
