@@ -48,7 +48,8 @@ let
     ];
   };
   renpy-fhs = buildFHSEnv {
-    name = "renpy-fhs";
+    pname = "renpy-fhsenv";
+    version = version;
     includeClosures = true;
     targetPkgs = (
       p: with p; [
@@ -83,7 +84,7 @@ let
   };
 in
 stdenv.mkDerivation {
-  name = "renpy";
+  pname = pname;
   version = version;
   src =
     if stdenv.hostPlatform.isAarch then
