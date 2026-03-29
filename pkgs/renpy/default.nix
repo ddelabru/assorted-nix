@@ -24,6 +24,10 @@ let
     url = "https://www.renpy.org/dl/${version}/renpy-${version}-rapt.zip";
     hash = "sha256-qS/qyVPIpDia3azITb7002WzjqehCer47IJJ7izytWE=";
   };
+  renpyweb-src = fetchzip {
+    url = "https://www.renpy.org/dl/${version}/renpy-${version}-web.zip";
+    hash = "sha256-qV1mpj7iJQw1c6nYyG3COVk35qyuZLkiFjQPuoHeWfo=";
+  };
   meta = {
     description = "Visual novel engine";
     homepage = "https://renpy.org";
@@ -53,32 +57,8 @@ let
     includeClosures = true;
     targetPkgs = (
       p: with p; [
-        assimp
-        ffmpeg
-        ffmpeg.lib
-        freetype
-        fribidi
-        glew
-        glew.dev
-        harfbuzz
-        harfbuzz.dev
         jdk25_headless
-        libGL
-        libGLU
-        libpng
-        (python3.withPackages (
-          python-pkgs: with python-pkgs; [
-            ecdsa
-            pefile
-            pygame-sdl2
-            requests
-            six
-            tkinter
-          ]
-        ))
-        SDL2
-        (lib.getDev SDL2)
-        zlib
+        sdl2-compat
       ]
     );
   };
@@ -107,9 +87,10 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/share/renpy/rapt
+    mkdir -p $out/share/renpy/{rapt,web}
     cp -pR ./* $out/share/renpy/
     cp -pR ${rapt-src}/* $out/share/renpy/rapt/
+    cp -pR ${renpyweb-src}/* $out/share/renpy/web/
 
     # Extract pngs from the Apple icon image and create
     # the missing ones from the 1024x1024 image.
