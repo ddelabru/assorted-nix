@@ -1,4 +1,4 @@
-# This custom Nix derivation of Ren'Py utilizes Steam to provide the Filesystem
+# This custom Nix derivation of Ren'Py uses chroot to provide the Filesystem
 # Hierarchy Standard (FHS) which is otherwise not present on NixOS, allowing
 # Ren'Py to make distributions of games. Instead of running Ren'Py from the Nix
 # store, it copies the Ren'Py SDK into ~/.local/share/renpy on the first run so
@@ -115,8 +115,6 @@ stdenv.mkDerivation {
 
     mkdir -p $out/bin
     install -Dm755 launch-renpy.sh $out/bin/renpy
-    wrapProgram $out/bin/renpy \
-      --suffix PATH : ${lib.makeBinPath [ jdk25_headless ]}
 
     runHook postInstall
   '';
